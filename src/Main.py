@@ -1,18 +1,24 @@
-import threading
-import UIMain
+import sys
+from PySide6.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout
+from localLib.EasyPySide import BaseWindow
 
-class Hello:
+class Window(BaseWindow):
     def __init__(self):
-        print("Class initialized. Hello!\n")
+        super().__init__()
 
-        self.gb = "Goodbye!"
+        self.setWindowTitleText("Главное окно")
+        self.setWindowIconImage(r"resources\terminalWhite.ico")
+
+        content = QVBoxLayout(self.contentArea)
+        content.setContentsMargins(10, 10, 10, 10)
+        content.addWidget(QLabel("Контент окна"))
+        content.addWidget(QPushButton("Кнопка"))
 
 def Main():
-    app = Hello()
-
-    print(app.gb)
+    app = QApplication(sys.argv)
+    window = Window()
+    window.show()
+    sys.exit(app.exec())
 
 if __name__ == "__main__":
-    ui = UIMain.App()
-    threading.Thread(target=Main, daemon=True).start()
-    ui.Run()
+    Main()
