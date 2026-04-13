@@ -1,3 +1,37 @@
+# `BaseWindow` 📝 Базовый шаблон окна. [[Назад](Main.md)]
+
+> ### 💡 Примечание
+> У шаблона окна есть `contentArea` именно сюда и нужно прикрепить все виджети
+
+### 🔍 Пример использования
+```python
+from localLib.EasyPySide import BaseWindow
+
+window = BaseWindow()
+
+content = QVBoxLayout(window.contentArea)
+content.setContentsMargins(10, 10, 10, 10)
+content.addWidget(QLabel("Контент окна"))
+content.addWidget(QPushButton("Кнопка"))
+```
+
+> ### 💡 Примечание
+> У шаблона окна также есть `leftLayout`, `centerLayout` и `rightLayout` именно сюда и нужно прикрепить виджети если они должны бить в titleBar
+
+### 🔍 Пример использования
+```python
+from localLib.EasyPySide import BaseWindow
+
+window = BaseWindow()
+
+window.leftLayout.addWidget(QLabel("left"))
+window.centerLayout.addWidget(QLabel("center"))
+window.rightLayout.addWidget(QLabel("right"))
+```
+<hr><br>
+
+
+
 ## `setResizeEnabled` 📝 Функция для изменения состояния Resize. [[Назад](Main.md)]
 
 ### ⚙️ Параметры

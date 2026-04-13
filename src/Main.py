@@ -1,5 +1,6 @@
 import sys
-from PySide6.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout
+from PySide6.QtWidgets import QApplication, QLabel, QPushButton, QVBoxLayout, QHBoxLayout
+from PySide6.QtCore import Qt
 from localLib.EasyPySide import BaseWindow
 
 #from localLib.EasyPySide.Widgets import UniversalMediaContainer
@@ -15,6 +16,10 @@ class Window(BaseWindow):
         content.setContentsMargins(10, 10, 10, 10)
         content.addWidget(QLabel("Контент окна"))
         content.addWidget(QPushButton("Кнопка"))
+
+        self.leftLayout.addWidget(QLabel("left"))
+        self.centerLayout.addWidget(QLabel("center"))
+        self.rightLayout.addWidget(QLabel("right"))
 
 def Main():
     app = QApplication(sys.argv)

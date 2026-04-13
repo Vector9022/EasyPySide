@@ -127,20 +127,41 @@ class BaseWindow(QWidget):
         self._titleBar.setFixedHeight(35)
         self._titleBar.setProperty("titleBar", "")
 
-        layout = QHBoxLayout(self._titleBar)
-        layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(0)
+        mainLayout = QHBoxLayout(self._titleBar)
+        mainLayout.setContentsMargins(0, 0, 0, 0)
+        mainLayout.setSpacing(0)
 
-        # Иконка
+        # === LEFT SECTION ===
+        self._titleLeft = QWidget()
+        self.leftLayout = QHBoxLayout(self._titleLeft)
+        self.leftLayout.setContentsMargins(0, 0, 0, 0)
+        self.leftLayout.setSpacing(0)
+        self.leftLayout.setAlignment(Qt.AlignLeft)
+
         self._titleIcon = QLabel()
         self._titleIcon.setFixedSize(self._titleBar.height(), self._titleBar.height())
         self._titleIcon.setAlignment(Qt.AlignCenter)
 
-        # Текст
         self._titleLabel = QLabel()
         self._titleLabel.setAlignment(Qt.AlignVCenter | Qt.AlignLeft)
 
-        # Кнопки
+        self.leftLayout.addWidget(self._titleIcon)
+        self.leftLayout.addWidget(self._titleLabel)
+
+        # === CENTER SECTION ===
+        self._titleCenter = QWidget()
+        self.centerLayout = QHBoxLayout(self._titleCenter)
+        self.centerLayout.setContentsMargins(0, 0, 0, 0)
+        self.centerLayout.setSpacing(0)
+        self.centerLayout.setAlignment(Qt.AlignCenter)
+
+        # === RIGHT SECTION ===
+        self._titleRight = QWidget()
+        self.rightLayout = QHBoxLayout(self._titleRight)
+        self.rightLayout.setContentsMargins(0, 0, 0, 0)
+        self.rightLayout.setSpacing(0)
+        self.rightLayout.setAlignment(Qt.AlignRight)
+
         iconFont = QFont("Segoe Fluent Icons")
         iconFont.setPointSize(10)
 
@@ -159,13 +180,14 @@ class BaseWindow(QWidget):
         self._btnMinimize.clicked.connect(self.showMinimized)
         self._btnMaximize.clicked.connect(self._toggleMaximize)
 
-        # Layout
-        layout.addWidget(self._titleIcon)
-        layout.addWidget(self._titleLabel)
-        layout.addStretch()
-        layout.addWidget(self._btnMinimize)
-        layout.addWidget(self._btnMaximize)
-        layout.addWidget(self._btnClose)
+        self.rightLayout.addWidget(self._btnMinimize)
+        self.rightLayout.addWidget(self._btnMaximize)
+        self.rightLayout.addWidget(self._btnClose)
+
+        # === ADD TO MAIN LAYOUT ===
+        mainLayout.addWidget(self._titleLeft)
+        mainLayout.addWidget(self._titleCenter, 1)  # растягивается
+        mainLayout.addWidget(self._titleRight)
 
         self._mainLayout.addWidget(self._titleBar)
 
